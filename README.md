@@ -42,12 +42,25 @@ After a 'vagrant up' you will be prompted for your local machine password.
 
 ## Building
 
+After login change into the NFS folder 'vagrant'.
+
+```
+cd /home/core/vagrant
+```
+
 Run the following commands to build all images with docker.
 
 ```
 docker build --no-cache --rm -t wolffaxn/base base
 docker build --no-cache --rm -t wolffaxn/java java
 docker build --no-cache --rm -t wolffaxn/tomcat tomcat
+docker build --no-cache --rm -t wolffaxn/jenkins jenkins
+```
+
+## Running
+
+```
+docker run -t -p 8080:8080 wolffaxn/jenkins
 ```
 
 ## License
