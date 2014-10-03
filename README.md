@@ -47,6 +47,7 @@ Run the following commands to build all images with docker.
 ```
 docker build --no-cache --rm -t wolffaxn/base base
 docker build --no-cache --rm -t wolffaxn/java java
+docker build --no-cache --rm -t wolffaxn/tomcat tomcat
 ```
 
 ## License
