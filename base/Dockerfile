@@ -10,4 +10,5 @@ RUN (yum -y update; yum clean all && \
 RUN ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
 # regenerating ssh host keys
 RUN (rm -rvf /etc/ssh/ssh_host_*_key && \
-    ssh-keygen -q -t rsa -f /etc/ssh/ssh_host_rsa_key -N '')
+    ssh-keygen -q -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' && \
+    ssh-keygen -q -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N '')
