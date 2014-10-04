@@ -55,12 +55,14 @@ docker build --no-cache --rm -t wolffaxn/base base
 docker build --no-cache --rm -t wolffaxn/java java
 docker build --no-cache --rm -t wolffaxn/tomcat tomcat
 docker build --no-cache --rm -t wolffaxn/jenkins jenkins
+docker build --no-cache --rm -t wolffaxn/nexus nexus
 ```
 
 ## Running
 
 ```
-docker run -t -p 8080:8080 wolffaxn/jenkins
+docker run -d -p 8081:8080 -t wolffaxn/jenkins
+docker run -d -p 8082:8080 -t wolffaxn/nexus
 ```
 
 ## License
