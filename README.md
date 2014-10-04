@@ -51,18 +51,18 @@ cd /home/core/vagrant
 Run the following commands to build all images with docker.
 
 ```
-docker build --no-cache --rm -t wolffaxn/base base
-docker build --no-cache --rm -t wolffaxn/java java
-docker build --no-cache --rm -t wolffaxn/tomcat tomcat
-docker build --no-cache --rm -t wolffaxn/jenkins jenkins
-docker build --no-cache --rm -t wolffaxn/nexus nexus
+docker build --rm -t wolffaxn/base base
+docker build --rm -t wolffaxn/java java
+docker build --rm -t wolffaxn/tomcat tomcat
+docker build --rm -t wolffaxn/jenkins jenkins
+docker build --rm -t wolffaxn/nexus nexus
 ```
 
 ## Running
 
 ```
-docker run -d -p 8081:8080 -t wolffaxn/jenkins
-docker run -d -p 8082:8080 -t wolffaxn/nexus
+docker run -d -p 2021:22 -p 8081:8080 --name=jenkins -t wolffaxn/jenkins
+docker run -d -p 2022:22 -p 8082:8080 --name=nexus -t wolffaxn/nexus
 ```
 
 ## License
