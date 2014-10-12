@@ -56,13 +56,15 @@ docker build --rm -t wolffaxn/java java
 docker build --rm -t wolffaxn/tomcat tomcat
 docker build --rm -t wolffaxn/jenkins jenkins
 docker build --rm -t wolffaxn/nexus nexus
+docker build --rm -t wolffaxn/sonarqube sonarqube
 ```
 
 ## Running
 
 ```
-docker run -d -p 2021:22 -p 8081:8080 --name=jenkins -t wolffaxn/jenkins
-docker run -d -p 2022:22 -p 8082:8080 --name=nexus -t wolffaxn/nexus
+docker run -d -p 2021:22 -p 8081:8080 --name=jenkins -t -i wolffaxn/jenkins
+docker run -d -p 2022:22 -p 8082:8080 --name=nexus -t -i wolffaxn/nexus
+docker run -d -p 2023:22 -p 8083:8080 --name=sonarqube -t -i wolffaxn/sonarqube
 ```
 
 ## License
