@@ -18,4 +18,4 @@ RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/apach
     ln -s /usr/share/apache-tomcat-8.0.14 /usr/share/tomcat8 && \
     chown root:root -R /usr/share/apache-tomcat-8.0.14)
 
-RUN mkdir -p /var/run/tomcat
+RUN (mkdir -p /var/log/tomcat && mkdir -p /var/run/tomcat)
