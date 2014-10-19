@@ -4,7 +4,7 @@ MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 RUN (yum -y update; yum clean all && \
     yum -y install epel-release; yum clean all && \
-    yum -y install bash curl openssh-server tar unzip vim wget zsh; yum clean all)
+    yum -y install bash curl net-tools openssh-server tar unzip vim wget zsh; yum clean all)
 
 # set timezone
 RUN ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
