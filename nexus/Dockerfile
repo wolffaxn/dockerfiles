@@ -4,8 +4,9 @@ MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 RUN yum -y install supervisor; yum clean all
 
-# Nexus
-RUN useradd -m -d /home/nexus -s /bin/bash -c "nexus user" nexus
+# add user and group 'nexus' and set its pasword
+RUN (useradd -s /bin/bash -c "nexus user" nexus && \
+    echo "nexus:nexus" | chpasswd)
 
 RUN (mkdir -p /home/nexus/bin && \
     mkdir -p /home/nexus/conf && \
