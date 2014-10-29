@@ -4,7 +4,9 @@ MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 RUN yum -y install postgresql-client supervisor; yum clean all
 
-RUN useradd -m -d /home/sonar -s /bin/bash -c "sonar user" sonar
+# add user and group 'sonar' and set its pasword
+RUN (useradd -s /bin/bash -c "sonar user" sonar && \
+    echo "sonar:sonar" | chpasswd)
 
 RUN (mkdir -p /home/sonar/bin && mkdir -p /home/sonar/logs)
 
