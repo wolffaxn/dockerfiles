@@ -4,8 +4,9 @@ MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 RUN yum -y install supervisor; yum clean all
 
-# Jenkins
-RUN useradd -m -d /home/jenkins -s /bin/bash -c "jenkins user" jenkins
+# add user and group 'jenkins' and set its pasword
+RUN (useradd -s /bin/bash -c "jenkins user" jenkins && \
+    echo "jenkins:jenkins" | chpasswd)
 
 RUN (mkdir -p /home/jenkins/bin && \
     mkdir -p /home/jenkins/conf && \
