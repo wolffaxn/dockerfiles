@@ -4,32 +4,35 @@ MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 RUN yum -y install supervisor; yum clean all
 
-# add user and group 'jenkins' and set its pasword
-RUN (useradd -s /bin/bash -c "jenkins user" jenkins && \
+ENV JENKINS_VERSION 1.565.3
+
+# create directory structure, add user and group 'jenkins' and set its pasword
+RUN (mkdir -p /usr/share/jenkins/bin && \
+    mkdir -p /usr/share/jenkins/conf && \
+    mkdir -p /usr/share/jenkins/logs && \
+    mkdir -p /usr/share/jenkins/temp && \
+    mkdir -p /usr/share/jenkins/webapps && \
+    mkdir -p /usr/share/jenkins/work && \
+    useradd -d /home/jenkins -m -s /bin/bash -c "jenkins user" jenkins && \
     echo "jenkins:jenkins" | chpasswd)
 
-RUN (mkdir -p /home/jenkins/bin && \
-    mkdir -p /home/jenkins/conf && \
-    mkdir -p /home/jenkins/logs && \
-    mkdir -p /home/jenkins/temp && \
-    mkdir -p /home/jenkins/webapps && \
-    mkdir -p /home/jenkins/work)
+ADD bin/setenv.sh /usr/share/jenkins/bin/setenv.sh
+ADD bin/startup.sh /usr/share/jenkins/bin/startup.sh
+ADD bin/shutdown.sh /usr/share/jenkins/bin/shutdown.sh
+RUN chmod 750 /usr/share/jenkins/bin/*.sh
 
-ADD bin/setenv.sh /home/jenkins/bin/setenv.sh
-ADD bin/startup.sh /home/jenkins/bin/startup.sh
-ADD bin/shutdown.sh /home/jenkins/bin/shutdown.sh
-RUN chmod 750 /home/jenkins/bin/*.sh
+RUN cp /usr/share/tomcat7/conf/* /usr/share/jenkins/conf
+ADD conf/server.xml /usr/share/jenkins/conf/server.xml
+RUN chmod 640 /usr/share/jenkins/conf/*
 
-RUN cp /usr/share/tomcat7/conf/* /home/jenkins/conf
-ADD conf/server.xml /home/jenkins/conf/server.xml
-RUN chmod 640 /home/jenkins/conf/*
-
-RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/jenkins.war http://mirrors.jenkins-ci.org/war-stable/1.565.3/jenkins.war && \
-    mv /tmp/jenkins.war /home/jenkins/webapps && \
-    chmod 640 /home/jenkins/webapps/*.war && \
-    chown -R jenkins:jenkins /home/jenkins && \
+RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/jenkins.war http://mirrors.jenkins-ci.org/war-stable/$JENKINS_VERSION/jenkins.war && \
+    mv /tmp/jenkins.war /usr/share/jenkins/webapps && \
+    chmod 640 /usr/share/jenkins/webapps/*.war && \
+    chown -R jenkins:jenkins /usr/share/jenkins && \
     mkdir /var/jenkins && \
     chown -R jenkins:jenkins /var/jenkins)
+
+VOLUME /var/jenkins
 
 # supervisord
 RUN mkdir -p /var/run/supervisord
