@@ -1,8 +1,6 @@
-FROM wolffaxn/tomcat:latest
+FROM wolffaxn/tomcat7:latest
 
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
-
-RUN yum -y install supervisor; yum clean all
 
 ENV JENKINS_VERSION 1.565.3
 
@@ -35,8 +33,9 @@ RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/jenki
 VOLUME /var/jenkins
 
 # supervisord
-RUN mkdir -p /var/run/supervisord
-ADD conf/supervisord.conf /etc/supervisord.conf
+ADD conf/jenkins.conf /etc/supervisord.d/jenkins.conf
 
-EXPOSE 22 8080
-CMD supervisord -c /etc/supervisord.conf
+EXPOSE 8080
+
+# default command
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
