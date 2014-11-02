@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-. /home/nexus/bin/setenv.sh
+. /usr/share/nexus/bin/setenv.sh
 
 . $CATALINA_HOME/bin/catalina.sh start
 
