@@ -1,4 +1,4 @@
-FROM wolffaxn/java:latest
+FROM wolffaxn/oracle-java8:latest
 
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
