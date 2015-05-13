@@ -11,8 +11,6 @@ RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/wildf
     ln -s /tmp/wildfly-$WILDFLY_VERSION /usr/share/wildfly && \
     chown root:root -R /tmp/wildfly-$WILDFLY_VERSION)
 
-http://download.jboss.org/wildfly/8.2.0.Final/wildfly-8.2.0.Final.tar.gz
-
 RUN (mkdir -p /var/log/wildfly && mkdir -p /var/run/wildfly)
 
 # default command
