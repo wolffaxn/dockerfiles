@@ -58,6 +58,7 @@ docker build --rm -t wolffaxn/tomcat8 tomcat8
 docker build --rm -t wolffaxn/jenkins jenkins
 docker build --rm -t wolffaxn/nexus nexus
 docker build --rm -t wolffaxn/sonarqube sonarqube
+docker build --rm -t wolffaxn/wildfly wildfly
 ```
 
 ## Running
