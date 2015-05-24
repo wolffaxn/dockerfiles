@@ -2,6 +2,8 @@ FROM wolffaxn/oracle-java8:latest
 
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
+ENV SONARQUBE_VERSION 5.1
+
 RUN yum -y install postgresql-client supervisor; yum clean all
 
 # add user and group 'sonar' and set its pasword
@@ -14,14 +16,14 @@ ADD bin/setenv.sh /home/sonar/bin/setenv.sh
 ADD bin/startup.sh /home/sonar/bin/startup.sh
 RUN (chmod 750 /home/sonar/bin/*.sh && chown -R sonar:sonar /home/sonar)
 
-RUN (wget --progress=bar:force --no-cookies -O /tmp/sonarqube-4.5.zip http://dist.sonar.codehaus.org/sonarqube-4.5.zip && \
-    echo "a39a52a29344b422029bd8b04d1cb84d /tmp/sonarqube-4.5.zip" | md5sum -c > /dev/null 2>&1 || echo "error: md5 mismatch" && \
-    unzip /tmp/sonarqube-4.5.zip -d /usr/share && \
-    rm /tmp/sonarqube-4.5.zip && \
-    ln -s /usr/share/sonarqube-4.5 /usr/share/sonarqube)
+RUN (wget --progress=bar:force --no-cookies -O /tmp/sonarqube-$SONARQUBE_VERSION.zip http://dist.sonar.codehaus.org/sonarqube-$SONARQUBE_VERSION.zip && \
+    echo "6a70c7df869eea4079b405f183f81b3e /tmp/sonarqube-$SONARQUBE_VERSION.zip" | md5sum -c > /dev/null 2>&1 || echo "error: md5 mismatch" && \
+    unzip /tmp/sonarqube-$SONARQUBE_VERSION.zip -d /usr/share && \
+    rm /tmp/sonarqube-$SONARQUBE_VERSION.zip && \
+    ln -s /usr/share/sonarqube-$SONARQUBE_VERSION /usr/share/sonarqube)
 
-ADD conf/sonar.properties /usr/share/sonarqube-4.5/conf/sonar.properties
-RUN chown -R sonar:sonar /usr/share/sonarqube-4.5
+ADD conf/sonar.properties /usr/share/sonarqube-$SONARQUBE_VERSION/conf/sonar.properties
+RUN chown -R sonar:sonar /usr/share/sonarqube-$SONARQUBE_VERSION
 
 ENV DB_HOST postgresql
 ENV DB_PORT 5432
