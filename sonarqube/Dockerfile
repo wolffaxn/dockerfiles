@@ -4,7 +4,7 @@ MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 ENV SONARQUBE_VERSION 5.1
 
-RUN yum -y install postgresql-client supervisor; yum clean all
+RUN yum -y install postgresql-client; yum clean all
 
 # add user and group 'sonar' and set its pasword
 RUN (useradd -s /bin/bash -c "sonar user" sonar && \
