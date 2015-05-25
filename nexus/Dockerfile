@@ -30,7 +30,7 @@ RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/nexus
     mkdir /var/nexus && \
     chown -R nexus:nexus /var/nexus)
 
-VOLUME /var/nexus
+VOLUME ["/var/nexus"]
 
 # supervisord
 ADD conf/nexus.conf /etc/supervisord.d/nexus.conf

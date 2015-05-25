@@ -30,7 +30,7 @@ RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/jenki
     mkdir /var/jenkins && \
     chown -R jenkins:jenkins /var/jenkins)
 
-VOLUME /var/jenkins
+VOLUME ["/var/jenkins"]
 
 # supervisord
 ADD conf/jenkins.conf /etc/supervisord.d/jenkins.conf
