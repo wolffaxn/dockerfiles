@@ -53,7 +53,7 @@ Run the following commands to build all images with docker.
 ```
 docker build --rm -t wolffaxn/base base
 docker build --rm -t wolffaxn/oracle-java8 oracle-java8
-docker build --rm -t wolffaxn/postgresql 
+docker build --rm -t wolffaxn/postgresql postgresql 
 docker build --rm -t wolffaxn/tomcat7 tomcat7
 docker build --rm -t wolffaxn/tomcat8 tomcat8
 docker build --rm -t wolffaxn/jenkins jenkins
