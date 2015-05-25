@@ -11,8 +11,8 @@ RUN yum -y install postgresql94-server postgresql94-client postgresql94-contrib;
 USER postgres
 
 # configure postgresql so that remote database connections are possible
-RUN (echo "host all  all    0.0.0.0/0  md5" >> /etc/postgresql/9.4/main/pg_hba.conf && \
-    echo "listen_addresses='*'" >> /etc/postgresql/9.4/main/postgresql.conf)
+RUN (echo "host all  all    0.0.0.0/0  md5" >> /var/lib/pgsql/9.4/data/pg_hba.conf && \
+    echo "listen_addresses='*'" >> /var/lib/pgsql/9.4/data/postgresql.conf)
 
 # expose the PostgreSQL port
 EXPOSE 5432
@@ -21,4 +21,4 @@ EXPOSE 5432
 VOLUME ["/etc/postgresql", "/var/lib/postgresql", "/var/log/postgresql"]
 
 # run postgresql
-CMD ["/usr/lib/postgresql/9.4/bin/postgresql", "-D", "var/lib/postgresql/9.4/main", "-c", "/etc/postgresql/9.4/main/postgresql.conf"]
+CMD ["/usr/lib/postgresql/9.4/bin/postgresql", "-D", "var/lib/postgresql/9.4/main", "-c", "/var/lib/pgsql/9.4/data/postgresql.conf"]
