@@ -31,8 +31,9 @@ ENV DB_USER sonar
 ENV DB_PASS sonar
 
 # supervisord
-RUN mkdir -p /var/run/supervisord
-ADD conf/supervisord.conf /etc/supervisord.conf
+ADD conf/sonarqube.conf /etc/supervisord.d/sonarqube.conf
 
 EXPOSE 22 8080
-CMD supervisord -c /etc/supervisord.conf
+
+# default command
+CMD ["supervisord", "-c", "/etc/supervisord.conf"]
