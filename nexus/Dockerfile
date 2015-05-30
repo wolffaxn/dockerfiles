@@ -35,7 +35,7 @@ VOLUME ["/var/nexus"]
 # supervisord
 ADD conf/nexus.conf /etc/supervisord.d/nexus.conf
 
-EXPOSE 8080
+EXPOSE 8005 8080
 
 # default command
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]

@@ -35,7 +35,7 @@ VOLUME ["/var/jenkins"]
 # supervisord
 ADD conf/jenkins.conf /etc/supervisord.d/jenkins.conf
 
-EXPOSE 8080
+EXPOSE 8005 8080
 
 # default command
 CMD ["supervisord", "-c", "/etc/supervisord.conf"]
