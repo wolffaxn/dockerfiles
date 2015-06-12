@@ -6,7 +6,7 @@ This repository contains a set of Dockerfiles for various application stacks.
 
 1) Install dependencies
 
-* [CoreOS](https://coreos.com) 647.0.0 or greater.
+* [CoreOS](https://coreos.com) 681.0.0 or greater.
 * [Vagrant](https://www.vagrantup.com) 1.7.2 or greater.
 * [VirtualBox](https://www.virtualbox.org) 4.3.20 or greater.
 
@@ -53,7 +53,7 @@ Run the following commands to build all images with docker.
 ```
 docker build --rm -t wolffaxn/base base
 docker build --rm -t wolffaxn/oracle-java8 oracle-java8
-docker build --rm -t wolffaxn/postgresql postgresql 
+docker build --rm -t wolffaxn/postgresql postgresql
 docker build --rm -t wolffaxn/tomcat7 tomcat7
 docker build --rm -t wolffaxn/tomcat8 tomcat8
 docker build --rm -t wolffaxn/jenkins jenkins
