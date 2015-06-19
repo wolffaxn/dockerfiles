@@ -10,6 +10,11 @@ BOXNAME = "dockerbox"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+  # cache downloaded files
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+  
   # CoreOS
   config.vm.box = "coreos-stable"
   config.vm.box_version = ">= 681.0.0"
