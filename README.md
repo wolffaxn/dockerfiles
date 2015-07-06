@@ -16,14 +16,23 @@ This repository contains a set of Dockerfiles for various application stacks.
 git clone https://github.com/wolffaxn/dockerfiles.git
 cd dockerfiles
 ```
-3) Startup and SSH
+
+3) Install vagrant plugins
+
+```
+vagrant plugin install vagrant-cachier
+vagrant plugin install vagrant-hostsupdater
+vagrant plugin install vagrant-vbguest
+```
+
+4) Startup and SSH
 
 ```
 vagrant up
 vagrant ssh
 ```
 
-4) Get started [using CoreOS](https://coreos.com/docs/using-coreos)
+5) Get started [using CoreOS](https://coreos.com/docs/using-coreos)
 
 ### Shared folder setup
 
@@ -35,10 +44,9 @@ config.vm.network :private_network, ip: "192.168.2.10"
 
 # enable NFS for sharing the host machine into the coreos-vagrant VM
 config.vm.synced_folder ".", "/home/core/vagrant", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
-config.vm.synced_folder "#{ENV['HOME']}/.vagrant-share", "/home/core/vagrant-share", id: "share", :nfs => true, :mount_options => ['nolock,vers=3,udp']
 ```
 
-After a 'vagrant up' you will be prompted for your local machine password.
+After 'vagrant up' you will be prompted for your local machine password.
 
 ## Building
 
