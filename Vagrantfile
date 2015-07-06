@@ -46,6 +46,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
     vb.customize ["modifyvm", :id, "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--audio", "none"]
+    vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
+    vb.customize ["modifyvm", :id, "--nictype2", "virtio"]    
   end
 
   # NFS requires a host-only network to be created
