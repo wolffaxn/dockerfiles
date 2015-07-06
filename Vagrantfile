@@ -10,11 +10,6 @@ BOXNAME = "dockerbox"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  # cache downloaded files
-  if Vagrant.has_plugin?("vagrant-cachier")
-    config.cache.scope = :box
-  end
-
   # CoreOS
   config.vm.box = "coreos-stable"
   config.vm.box_version = ">= 681.2.0"
@@ -29,33 +24,33 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the hostname the machine should have
   config.vm.hostname = "#{BOXNAME}.localdomain"
 
-  if Vagrant.has_plugin?("vagrant-vbguest") then
-    config.vbguest.auto_update = false
-  end
+  # NFS requires a host-only network to be created
+  config.vm.network :private_network, ip: "192.168.2.10"
+
+  # enable NFS for sharing the host machine into the coreos-vagrant VM
+  config.vm.synced_folder ".", "/home/core/vagrant", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = BOXNAME
-
-    # vbox guest additions and vboxsf
-    vb.check_guest_additions = false
-    vb.functional_vboxsf = false
-
-    # disable vbox gui
-    vb.gui = false
 
     vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
     vb.customize ["modifyvm", :id, "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--memory", "2048"]
     vb.customize ["modifyvm", :id, "--audio", "none"]
     vb.customize ["modifyvm", :id, "--nictype1", "virtio"]
-    vb.customize ["modifyvm", :id, "--nictype2", "virtio"]    
+    vb.customize ["modifyvm", :id, "--nictype2", "virtio"]
   end
 
-  # NFS requires a host-only network to be created
-  config.vm.network :private_network, ip: "192.168.2.10"
+  # cache downloaded files
+  if Vagrant.has_plugin?('vagrant-cachier')
+    config.cache.scope = :machine
+  end
 
-  # enable NFS for sharing the host machine into the coreos-vagrant VM
-  config.vm.synced_folder ".", "/home/core/vagrant", id: "core", :nfs => true, :mount_options => ['nolock,vers=3,udp']
-  config.vm.synced_folder "#{ENV['HOME']}/.vagrant-share", "/home/core/vagrant-share", id: "share", :nfs => true, :mount_options => ['nolock,vers=3,udp']
+  if Vagrant.has_plugin?('vagrant-hostsupdater')
+    config.hostsupdater.aliases = node['aliases']
+  end
 
+  if Vagrant.has_plugin?('vagrant-vbguest')
+    config.vbguest.auto_update = false
+  end
 end
