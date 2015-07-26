@@ -2,7 +2,7 @@ FROM wolffaxn/tomcat7:latest
 
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
-ENV JENKINS_VERSION 1.596.3
+ENV JENKINS_VERSION 1.609.1
 
 # create directory structure, add user and group 'jenkins' and set its pasword
 RUN (mkdir -p /usr/share/jenkins/bin && \
