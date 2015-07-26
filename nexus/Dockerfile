@@ -2,7 +2,7 @@ FROM wolffaxn/tomcat7:latest
 
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
-ENV NEXUS_VERSION 2.11.1-01
+ENV NEXUS_VERSION 2.11.4-01
 
 # create directory structure, add user and group 'nexus' and set its pasword
 RUN (mkdir -p /usr/share/nexus/bin && \
