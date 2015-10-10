@@ -47,7 +47,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   if Vagrant.has_plugin?('vagrant-hostsupdater')
-    config.hostsupdater.aliases = node['aliases']
+    config.hostsupdater.aliases = []
   end
 
   if Vagrant.has_plugin?('vagrant-vbguest')
