@@ -4,7 +4,7 @@ MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 ENV JENKINS_VERSION 1.609.1
 
-# create directory structure, add user and group 'jenkins' and set its pasword
+# create directory structure, add user and group 'jenkins' and set its password
 RUN (mkdir -p /usr/share/jenkins/bin && \
     mkdir -p /usr/share/jenkins/conf && \
     mkdir -p /usr/share/jenkins/logs && \
