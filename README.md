@@ -8,7 +8,7 @@ This repository contains a set of Dockerfiles for various application stacks.
 
 * [CoreOS](https://coreos.com) 766.5.0 or greater.
 * [Vagrant](https://www.vagrantup.com) 1.7.4 or greater.
-* [VirtualBox](https://www.virtualbox.org) 4.3.30 or greater.
+* [VirtualBox](https://www.virtualbox.org) 5.0.10 or greater.
 
 2) Clone this project.
 
