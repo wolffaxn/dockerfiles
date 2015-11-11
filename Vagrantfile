@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_check_update = false
 
   # the hostname the machine should have
-  config.vm.hostname = "#{BOXNAME}.localdomain"
+  config.vm.hostname = "#{BOXNAME}"
 
   # NFS requires a host-only network to be created
   config.vm.network :private_network, ip: "192.168.2.10"
@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "virtualbox" do |vb|
     vb.name = BOXNAME
 
-    vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
+    vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
     vb.customize ["modifyvm", :id, "--cpus", "2"]
     vb.customize ["modifyvm", :id, "--memory", "2048"]
     vb.customize ["modifyvm", :id, "--audio", "none"]
