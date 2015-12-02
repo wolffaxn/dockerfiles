@@ -81,7 +81,3 @@ docker run -d -p 2023:22 -p 8083:8080 --name=sonarqube -t -i wolffaxn/sonarqube
 ## License
 
 Copyright 2014-2015 Alexander Wolff, Licensed under the MIT License.
-
-$export DOCKER_HOST=tcp://192.168.59.103:2376
-$export DOCKER_CERT_PATH=/Users/{profileName}/.boot2docker/certs/boot2docker-vm
-$export DOCKER_TLS_VERIFY=1
