@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:7
 
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
