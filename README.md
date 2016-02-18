@@ -80,4 +80,4 @@ docker run -d -p 2023:22 -p 8083:8080 --name=sonarqube -t -i wolffaxn/sonarqube
 
 ## License
 
-Copyright 2014-2015 Alexander Wolff, Licensed under the MIT License.
+Copyright 2014-2016 Alexander Wolff, Licensed under the MIT License.
