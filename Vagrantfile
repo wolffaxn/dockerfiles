@@ -12,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # CoreOS
   config.vm.box = "coreos-stable"
-  config.vm.box_version = ">= 835.8.0"
+  config.vm.box_version = ">= 835.12.0"
   config.vm.box_url = "http://stable.release.core-os.net/amd64-usr/current/coreos_production_vagrant.json"
 
   # time in seconds that Vagrant will wait for the machine to boot
@@ -44,10 +44,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # cache downloaded files
   if Vagrant.has_plugin?('vagrant-cachier')
     config.cache.scope = :machine
-  end
-
-  if Vagrant.has_plugin?('vagrant-hostsupdater')
-    config.hostsupdater.aliases = []
   end
 
   if Vagrant.has_plugin?('vagrant-vbguest')
