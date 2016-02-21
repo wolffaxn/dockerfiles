@@ -2,7 +2,7 @@ FROM wolffaxn/oracle-java8:latest
 
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
-ENV SONARQUBE_VERSION 5.2
+ENV SONARQUBE_VERSION 5.3
 
 RUN yum -y install postgresql-client; yum clean all
 
@@ -16,8 +16,8 @@ ADD bin/setenv.sh /home/sonar/bin/setenv.sh
 ADD bin/startup.sh /home/sonar/bin/startup.sh
 RUN (chmod 750 /home/sonar/bin/*.sh && chown -R sonar:sonar /home/sonar)
 
-RUN (wget --progress=bar:force --no-cookies -O /tmp/sonarqube-$SONARQUBE_VERSION.zip http://dist.sonar.codehaus.org/sonarqube-$SONARQUBE_VERSION.zip && \
-    echo "3d0e923a11f3ce5caa272e5ce86a711a /tmp/sonarqube-$SONARQUBE_VERSION.zip" | md5sum -c > /dev/null 2>&1 || echo "error: md5 mismatch" && \
+RUN (wget --progress=bar:force --no-cookies -O /tmp/sonarqube-$SONARQUBE_VERSION.zip https://sonarsource.bintray.com/Distribution/sonarqube/sonarqube-$SONARQUBE_VERSION.zip && \
+    echo "9ca7f69cce0bbbe519fc08da7c592d56 /tmp/sonarqube-$SONARQUBE_VERSION.zip" | md5sum -c > /dev/null 2>&1 || echo "error: md5 mismatch" && \
     unzip /tmp/sonarqube-$SONARQUBE_VERSION.zip -d /usr/share && \
     rm /tmp/sonarqube-$SONARQUBE_VERSION.zip && \
     ln -s /usr/share/sonarqube-$SONARQUBE_VERSION /usr/share/sonarqube)
