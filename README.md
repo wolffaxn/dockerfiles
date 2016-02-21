@@ -7,8 +7,8 @@ This repository contains a set of Dockerfiles for various application stacks.
 1) Install dependencies
 
 * [CoreOS](https://coreos.com) 835.12.0 or greater.
-* [Vagrant](https://www.vagrantup.com) 1.7.4 or greater.
-* [VirtualBox](https://www.virtualbox.org) 5.0.10 or greater.
+* [Vagrant](https://www.vagrantup.com) 1.8.1 or greater.
+* [VirtualBox](https://www.virtualbox.org) 5.0.14 or greater.
 
 2) Clone this project.
 
