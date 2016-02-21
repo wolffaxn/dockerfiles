@@ -4,7 +4,7 @@ MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 ENV NEXUS_VERSION 2.12.0-01
 
-# create directory structure, add user and group 'nexus' and set its pasword
+# create directory structure, add user and group 'nexus' and set its password
 RUN (mkdir -p /usr/share/nexus/bin && \
     mkdir -p /usr/share/nexus/conf && \
     mkdir -p /usr/share/nexus/logs && \
