@@ -14,7 +14,7 @@ RUN (wget --progress=bar:force --header "Cookie: oraclelicense=accept-secureback
 
 # define JAVA_HOME and PATH variable
 ENV JAVA_HOME /usr/java/jdk1.8.0
-ENV PATH "$PATH":"$JAVA_HOME/bin":.:
+ENV PATH $PATH:$JAVA_HOME/bin
 
 # default command
 CMD ["/bin/bash"]
