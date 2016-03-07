@@ -17,7 +17,7 @@ RUN (rm -rvf /etc/ssh/ssh_host_*_key && \
 RUN echo 'root:topsecret' | chpasswd
 
 # supervisord
-RUN mkdir -p /var/run/supervisor
+RUN mkdir -p /var/run/sshd /var/run/supervisor
 ADD conf/supervisord.conf /etc/supervisord.conf
 
 EXPOSE 22
