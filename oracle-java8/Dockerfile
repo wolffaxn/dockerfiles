@@ -9,10 +9,12 @@ RUN (wget --progress=bar:force --header "Cookie: oraclelicense=accept-secureback
     tar xzf /tmp/jdk-8u74-linux-x64.tar.gz -C /usr/java && \
     rm /tmp/jdk-8u74-linux-x64.tar.gz && \
     ln -s /usr/java/jdk1.8.0_74 /usr/java/java8 && \
-    chown root:root -R /usr/java/jdk1.8.0_74)
+    chown root:root -R /usr/java/jdk1.8.0_74 && \
+    ln -s /usr/java/jdk1.8.0_74/bin/jjs /usr/bin)
 
-# define JAVA_HOME variable
+# define JAVA_HOME and PATH variable
 ENV JAVA_HOME /usr/java/java8
+ENV PATH "$PATH":/usr/java/java8/bin:.:
 
 # default command
 CMD ["/bin/bash"]
