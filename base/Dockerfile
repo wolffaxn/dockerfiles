@@ -3,6 +3,7 @@ FROM centos:7
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 RUN (yum -y update; yum clean all && \
+    yum -y install epel-release; yum clean all && \
     yum -y install bash curl net-tools openssh-server supervisor tar unzip vim wget zsh; yum clean all)
 
 # set timezone
@@ -23,4 +24,4 @@ ADD conf/supervisord.conf /etc/supervisord.conf
 EXPOSE 22
 
 # default command
-CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
