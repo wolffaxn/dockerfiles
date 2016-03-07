@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export JAVA_HOME=/usr/java/java8
+export JAVA_HOME=/usr/java/jdk1.8.0
 
 export CATALINA_BASE=/usr/share/nexus
 export CATALINA_HOME=/usr/share/tomcat7
