@@ -2,15 +2,15 @@ FROM wolffaxn/tomcat7:latest
 
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
-ENV JENKINS_VERSION 1.642.1
+ENV JENKINS_VERSION 1.642.2
 
 # create directory structure, add user and group 'jenkins' and set its password
-RUN (mkdir -p /usr/share/jenkins/bin && \
-    mkdir -p /usr/share/jenkins/conf && \
-    mkdir -p /usr/share/jenkins/logs && \
-    mkdir -p /usr/share/jenkins/temp && \
-    mkdir -p /usr/share/jenkins/webapps && \
-    mkdir -p /usr/share/jenkins/work && \
+RUN (mkdir -p /usr/share/jenkins/bin \
+    /usr/share/jenkins/conf \
+    /usr/share/jenkins/logs \
+    /usr/share/jenkins/temp \
+    /usr/share/jenkins/webapps \
+    /usr/share/jenkins/work && \
     useradd -d /home/jenkins -m -s /bin/bash -c "jenkins user" jenkins && \
     echo "jenkins:jenkins" | chpasswd)
 
@@ -38,4 +38,4 @@ ADD conf/jenkins.conf /etc/supervisord.d/jenkins.conf
 EXPOSE 8005 8080
 
 # default command
-CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
