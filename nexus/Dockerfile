@@ -5,12 +5,12 @@ MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 ENV NEXUS_VERSION 2.12.0-01
 
 # create directory structure, add user and group 'nexus' and set its password
-RUN (mkdir -p /usr/share/nexus/bin && \
-    mkdir -p /usr/share/nexus/conf && \
-    mkdir -p /usr/share/nexus/logs && \
-    mkdir -p /usr/share/nexus/temp && \
-    mkdir -p /usr/share/nexus/webapps && \
-    mkdir -p /usr/share/nexus/work && \
+RUN (mkdir -p /usr/share/nexus/bin \
+    /usr/share/nexus/conf \
+    /usr/share/nexus/logs \
+    /usr/share/nexus/temp \
+    /usr/share/nexus/webapps \
+    /usr/share/nexus/work && \
     useradd -s /bin/bash -c "nexus user" nexus && \
     echo "nexus:nexus" | chpasswd)
 
@@ -38,4 +38,4 @@ ADD conf/nexus.conf /etc/supervisord.d/nexus.conf
 EXPOSE 8005 8080
 
 # default command
-CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
