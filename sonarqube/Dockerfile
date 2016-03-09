@@ -6,11 +6,10 @@ ENV SONARQUBE_VERSION 5.3
 
 RUN yum -y install postgresql-client; yum clean all
 
-# add user and group 'sonar' and set its pasword
-RUN (useradd -s /bin/bash -c "sonar user" sonar && \
-    echo "sonar:sonar" | chpasswd)
+# add user 'sonar' and set its password
+RUN (useradd -s /bin/bash -c "sonar user" sonar && echo "sonar:sonar" | chpasswd)
 
-RUN (mkdir -p /home/sonar/bin && mkdir -p /home/sonar/logs)
+RUN mkdir -p /home/sonar/bin /home/sonar/logs
 
 ADD bin/setenv.sh /home/sonar/bin/setenv.sh
 ADD bin/startup.sh /home/sonar/bin/startup.sh
@@ -36,4 +35,4 @@ ADD conf/sonarqube.conf /etc/supervisord.d/sonarqube.conf
 EXPOSE 22 8080
 
 # default command
-CMD ["supervisord", "-c", "/etc/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
