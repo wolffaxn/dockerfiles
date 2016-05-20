@@ -2,11 +2,11 @@ FROM wolffaxn/oracle-java8:latest
 
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
-ENV TOMCAT_VERSION 7.0.68
+ENV TOMCAT_VERSION 7.0.69
 
 # Tomcat 7
 RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz http://www.eu.apache.org/dist/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz && \
-    echo "94688679d5f37499d1bd1a65eb9540e7 /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | md5sum -c > /dev/null 2>&1 || echo "error: md5 mismatch" && \
+    echo "10a071e5169a1a8b14ff35a0ad181052 /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | md5sum -c > /dev/null 2>&1 || echo "error: md5 mismatch" && \
     tar xzf /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz -C /usr/share && \
     rm /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz && \
     ln -s /usr/share/apache-tomcat-$TOMCAT_VERSION /usr/share/tomcat7 && \
