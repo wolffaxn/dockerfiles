@@ -1,7 +1,7 @@
 FROM centos:7
-
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
+# install main packages
 RUN (yum -y update; yum clean all && \
     yum -y install epel-release && \
     yum -y install bash curl net-tools openssh-server supervisor tar unzip vim wget zsh; yum clean all && \
