@@ -1,41 +1,45 @@
-FROM wolffaxn/tomcat7:latest
-
+FROM wolffaxn/java:latest
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
-ENV JENKINS_VERSION 1.651.2
+ARG JENKINS_VERSION
+ENV JENKINS_VERSION ${JENKINS_VERSION:-1.651.2}
+ARG JENKINS_HOME
+ENV JENKINS_HOME ${JENKINS_HOME:-/var/jenkins}
+ARG JENKINS_HTTP_PORT
+ENV JENKINS_HTTP_PORT ${JENKINS_HTTP_PORT:-8080}
+ARG JENKINS_AJP_PORT
+ENV JENKINS_AJP_PORT ${JENKINS_AJP_PORT:-8009}
+ARG JENKINS_SLAVE
+ENV JENKINS_SLAVE ${JENKINS_SLAVE:-50000}
 
-# create directory structure, add user and group 'jenkins' and set its password
-RUN (mkdir -p /usr/share/jenkins/bin \
-    /usr/share/jenkins/conf \
-    /usr/share/jenkins/logs \
+ARG user=jenkins
+ARG group=jenkins
+ARG uid=2000
+ARG gid=2000
+
+# add jenkins user and group and set its password
+RUN groupadd -g ${gid} ${group} && \
+    useradd -d /home/jenkins -u ${uid} -g ${gid} -m -s /bin/bash ${user} && \
+    echo "jenkins:jenkins" | chpasswd
+
+# create directory structure
+RUN mkdir -p /usr/share/jenkins/logs \
     /usr/share/jenkins/temp \
     /usr/share/jenkins/webapps \
-    /usr/share/jenkins/work && \
-    useradd -d /home/jenkins -m -s /bin/bash -c "jenkins user" jenkins && \
-    echo "jenkins:jenkins" | chpasswd)
+    /usr/share/jenkins/work \
+    /var/jenkins && \
+    chown -R ${user}:${group} /usr/share/jenkins "$JENKINS_HOME"
 
-ADD bin/setenv.sh /usr/share/jenkins/bin/setenv.sh
-ADD bin/startup.sh /usr/share/jenkins/bin/startup.sh
-ADD bin/shutdown.sh /usr/share/jenkins/bin/shutdown.sh
-RUN chmod 750 /usr/share/jenkins/bin/*.sh
+VOLUME ["$JENKINS_HOME"]
 
-RUN cp /usr/share/tomcat7/conf/* /usr/share/jenkins/conf
-ADD conf/server.xml /usr/share/jenkins/conf/server.xml
-RUN chmod 640 /usr/share/jenkins/conf/*
+RUN curl -fSL -o /usr/share/jenkins/webapps/jenkins.war http://repo.jenkins-ci.org/public/org/jenkins-ci/main/jenkins-war/${JENKINS_VERSION}/jenkins-war-${JENKINS_VERSION}.war && \
+    chown ${user}:${group} /usr/share/jenkins/webapps/jenkins.war
 
-RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/jenkins.war http://mirrors.jenkins-ci.org/war-stable/$JENKINS_VERSION/jenkins.war && \
-    mv /tmp/jenkins.war /usr/share/jenkins/webapps && \
-    chmod 640 /usr/share/jenkins/webapps/*.war && \
-    chown -R jenkins:jenkins /usr/share/jenkins && \
-    mkdir /var/jenkins && \
-    chown -R jenkins:jenkins /var/jenkins)
-
-VOLUME ["/var/jenkins"]
+# http, ajp and port used by attached slave agents
+EXPOSE $JENKINS_HTTP_PORT $JENKINS_AJP_PORT $JENKINS_SLAVE
 
 # supervisord
-ADD conf/jenkins.conf /etc/supervisord.d/jenkins.conf
-
-EXPOSE 8005 8080
+ADD supervisor-jenkins.conf /etc/supervisord.d/supervisor-jenkins.conf
 
 # default command
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
