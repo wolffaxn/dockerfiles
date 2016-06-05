@@ -1,6 +1,6 @@
 # dockerfiles
 
-This repository contains a set of Dockerfiles for various application stacks.
+A set of Java related Dockerfiles.
 
 ## Setup
 
