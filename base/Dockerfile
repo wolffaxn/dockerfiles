@@ -3,8 +3,9 @@ FROM centos:7
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 RUN (yum -y update; yum clean all && \
-    yum -y install epel-release; yum clean all && \
-    yum -y install bash curl net-tools openssh-server supervisor tar unzip vim wget zsh; yum clean all)
+    yum -y install epel-release && \
+    yum -y install bash curl net-tools openssh-server supervisor tar unzip vim wget zsh; yum clean all && \
+    yum clean all && rm -rf /var/cache/yum/*)
 
 # set timezone
 RUN ln -sf /usr/share/zoneinfo/Europe/Berlin /etc/localtime
