@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build --rm -t wolffaxn/oracle-java8 .
+docker build --rm -t wolffaxn/java .
