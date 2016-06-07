@@ -1,5 +1,4 @@
 FROM wolffaxn/oracle-java8:latest
-
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 ENV SONARQUBE_VERSION 5.3

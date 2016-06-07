@@ -1,5 +1,4 @@
 FROM wolffaxn/base:latest
-
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
 # first install the repository RPM from the PostgreSQL yum repository

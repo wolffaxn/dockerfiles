@@ -1,41 +1,43 @@
-FROM wolffaxn/tomcat7:latest
-
+FROM wolffaxn/java:latest
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
-ENV NEXUS_VERSION 2.13.0-01
+ARG NEXUS_VERSION
+ENV NEXUS_VERSION ${NEXUS_VERSION:-2.13.0-01}
+ARG NEXUS_WORK
+ENV NEXUS_WORK ${NEXUS_WORK:-/var/nexus}
+ARG NEXUS_HTTP_PORT
+ENV NEXUS_HTTP_PORT ${NEXUS_HTTP_PORT:-8080}
+ARG NEXUS_AJP_PORT
+ENV NEXUS_AJP_PORT ${NEXUS_AJP_PORT:-8009}
 
-# create directory structure, add user and group 'nexus' and set its password
-RUN (mkdir -p /usr/share/nexus/bin \
-    /usr/share/nexus/conf \
-    /usr/share/nexus/logs \
-    /usr/share/nexus/temp \
-    /usr/share/nexus/webapps \
-    /usr/share/nexus/work && \
-    useradd -s /bin/bash -c "nexus user" nexus && \
-    echo "nexus:nexus" | chpasswd)
+ARG user=nexus
+ARG group=nexus
+ARG uid=1002
+ARG gid=1002
 
-ADD bin/setenv.sh /usr/share/nexus/bin/setenv.sh
-ADD bin/startup.sh /usr/share/nexus/bin/startup.sh
-ADD bin/shutdown.sh /usr/share/nexus/bin/shutdown.sh
-RUN chmod 750 /usr/share/nexus/bin/*.sh
+# add nexus user and group and set its password
+RUN groupadd -g ${gid} ${group} && \
+    useradd -d /home/nexus -u ${uid} -g ${gid} -m -s /bin/bash ${user} && \
+    echo "nexus:nexus" | chpasswd
 
-RUN cp /usr/share/tomcat7/conf/* /usr/share/nexus/conf
-ADD conf/server.xml /usr/share/nexus/conf/server.xml
-RUN chmod 640 /usr/share/nexus/conf/*
+# create directory structure
+RUN mkdir -p "$NEXUS_WORK" && \
+    chown -R ${user}:${group} "$NEXUS_WORK"
 
-RUN (wget --progress=bar:force --no-check-certificate --no-cookies -O /tmp/nexus.war http://download.sonatype.com/nexus/oss/nexus-$NEXUS_VERSION.war && \
-    mv /tmp/nexus.war /usr/share/nexus/webapps && \
-    chmod 640 /usr/share/nexus/webapps/*.war && \
-    chown -R nexus:nexus /usr/share/nexus && \
-    mkdir /var/nexus && \
-    chown -R nexus:nexus /var/nexus)
+VOLUME ["$NEXUS_WORK"]
 
-VOLUME ["/var/nexus"]
+RUN curl -fSL -o /tmp/nexus-$NEXUS_VERSION-bundle.tar.gz http://download.sonatype.com/nexus/oss/nexus-$NEXUS_VERSION-bundle.tar.gz && \
+    tar xzf /tmp/nexus-$NEXUS_VERSION-bundle.tar.gz -C /usr/share && \
+    rm /tmp/nexus-$NEXUS_VERSION-bundle.tar.gz && \
+    rm -Rf /usr/share/sonatype-work && \
+    ln -s /usr/share/nexus-$NEXUS_VERSION /usr/share/nexus && \
+    chown ${user}:${group} -R /usr/share/nexus-$NEXUS_VERSION /usr/share/nexus
+
+# http and ajp port
+EXPOSE $NEXUS_HTTP_PORT $NEXUS_AJP_PORT
 
 # supervisord
-ADD conf/nexus.conf /etc/supervisord.d/nexus.conf
-
-EXPOSE 8005 8080
+ADD supervisor-nexus.conf /etc/supervisord.d/supervisor-nexus.conf
 
 # default command
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
