@@ -59,13 +59,13 @@ cd /home/core/vagrant
 Run the following commands to build all images with docker.
 
 ```
-docker build --rm -t wolffaxn/base/centos7 base
-docker build --rm -t wolffaxn/java/centos7 java
-docker build --rm -r wolffaxn/postgresql/centos7 postgresql
-docker build --rm -t wolffaxn/jenkins/centos7 jenkins
-docker build --rm -t wolffaxn/nexus/centos7 nexus
-docker build --rm -t wolffaxn/sonarqube/centos7 sonarqube
-docker build --rm -t wolffaxn/wildfly/centos7 wildfly
+docker build --rm -t wolffaxn/base base/centos7
+docker build --rm -t wolffaxn/java java/centos7
+docker build --rm -r wolffaxn/postgresql postgresql/centos7
+docker build --rm -t wolffaxn/jenkins jenkins/centos7
+docker build --rm -t wolffaxn/nexus nexus/centos7
+docker build --rm -t wolffaxn/sonarqube sonarqube/centos7
+docker build --rm -t wolffaxn/wildfly wildfly/centos7
 ```
 
 ## Running
