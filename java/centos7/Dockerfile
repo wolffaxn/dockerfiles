@@ -1,12 +1,12 @@
 FROM wolffaxn/base:latest
 MAINTAINER Alexander Wolff <wolffaxn@gmail.com>
 
-ARG JENKINS_SHA
-ENV JENKINS_SHA ${JENKINS_SHA:-79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987}
+ARG JAVA_SHA
+ENV JAVA_SHA ${JAVA_SHA:-79a3f25e9b466cb9e969d1772ea38550de320c88e9119bf8aa11ce8547c39987}
 
 # Java
 RUN curl -fSL --cookie "oraclelicense=accept-securebackup-cookie" -o /tmp/jdk-8u92-linux-x64.tar.gz http://download.oracle.com/otn-pub/java/jdk/8u92-b14/jdk-8u92-linux-x64.tar.gz && \
-    echo "$JENKINS_SHA /tmp/jdk-8u92-linux-x64.tar.gz" | sha256sum -c - && \
+    echo "${JAVA_SHA} /tmp/jdk-8u92-linux-x64.tar.gz" | sha256sum -c - && \
     mkdir -p /usr/java && \
     tar xzf /tmp/jdk-8u92-linux-x64.tar.gz -C /usr/java && \
     rm /tmp/jdk-8u92-linux-x64.tar.gz && \
