@@ -60,8 +60,8 @@ Run the following commands to build all images with docker.
 
 ```
 docker build --rm -t wolffaxn/base/centos7 base
-docker build --rm -t wolffaxn/oracle-java8 oracle-java8
-docker build --rm -r wolffaxn/postgresql/centos7
+docker build --rm -t wolffaxn/java/centos7 java
+docker build --rm -r wolffaxn/postgresql/centos7 postgresql
 docker build --rm -t wolffaxn/tomcat7/centos7 tomcat7
 docker build --rm -t wolffaxn/tomcat8/centos7 tomcat8
 docker build --rm -t wolffaxn/jenkins/centos7 jenkins
