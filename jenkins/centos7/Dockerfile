@@ -27,7 +27,7 @@ RUN mkdir -p /usr/share/jenkins/logs \
     /usr/share/jenkins/temp \
     /usr/share/jenkins/webapps \
     /usr/share/jenkins/work \
-    /var/jenkins && \
+    "$JENKINS_HOME" && \
     chown -R ${user}:${group} /usr/share/jenkins "$JENKINS_HOME"
 
 VOLUME ["$JENKINS_HOME"]
