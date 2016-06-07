@@ -17,7 +17,7 @@ ARG gid=1002
 
 # add nexus user and group and set its password
 RUN groupadd -g ${gid} ${group} && \
-    useradd -d /home/nexus -u ${uid} -g ${gid} -m -s /bin/bash ${user} && \
+    useradd -d /home/nexus -u ${uid} -g ${gid} -m -s /bin/false ${user} && \
     echo "nexus:nexus" | chpasswd
 
 # create directory structure

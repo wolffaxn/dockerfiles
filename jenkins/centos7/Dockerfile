@@ -19,7 +19,7 @@ ARG gid=2000
 
 # add jenkins user and group and set its password
 RUN groupadd -g ${gid} ${group} && \
-    useradd -d /home/jenkins -u ${uid} -g ${gid} -m -s /bin/bash ${user} && \
+    useradd -d /home/jenkins -u ${uid} -g ${gid} -m -s /bin/false ${user} && \
     echo "jenkins:jenkins" | chpasswd
 
 # create directory structure
