@@ -1,5 +1,7 @@
 # dockerfiles
 
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/wolffaxn/dockerfiles/master/LICENSE)
+
 A set of Java related Dockerfiles.
 
 ## Setup
