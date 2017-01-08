@@ -2,7 +2,7 @@
 
 This file is used to list changes made in each version of dockerfiles.
 
-## v0.0.1:
+## v0.0.1 (2017-01-08)
 * Initial release of dockerfiles
 * added CentOS 7.2 base image
 * added Oracle Java 8u92
