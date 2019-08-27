@@ -1,6 +1,9 @@
 # dockerfiles
 
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/wolffaxn/dockerfiles/master/LICENSE)
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/wolffaxn/dockerfiles/master.svg)](https://github.com/wolffaxn/dockerfiles)
+
+## About
 
 A set of Java related Dockerfiles.
 
