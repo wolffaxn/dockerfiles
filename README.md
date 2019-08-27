@@ -3,6 +3,19 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/wolffaxn/dockerfiles/master.svg)](https://github.com/wolffaxn/dockerfiles)
 
+**Table of Contents**
+
+<!-- toc -->
+
+- [About](#about)
+- [Setup](#setup)
+- [Shared folder setup](#shared-folder-setup)
+- [Building](#building)
+- [Running](#running)
+- [License](#license)
+
+<!-- tocstop -->
+
 ## About
 
 A set of Java related Dockerfiles.
